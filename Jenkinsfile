@@ -20,11 +20,11 @@ pipeline {
             }
         }
 
-        stage('Checkout from GitHub') {
-            steps {
-                git credentialsId: 'github-creds-id', url: 'https://github.com/Samruddhi0931/SWE_Assignment3.git'
-            }
-        }
+        // stage('Checkout from GitHub') {
+        //     steps {
+        //         git credentialsId: 'github-creds-id', url: 'https://github.com/Samruddhi0931/SWE_Assignment3.git'
+        //     }
+        // }
 
         stage('Build Spring Boot App') {
             steps {
