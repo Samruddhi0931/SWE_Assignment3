@@ -1,0 +1,376 @@
+<!--  <!DOCTYPE html>
+<html>
+<head>
+    <title>Student Survey Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('george.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 20px;
+        }
+        form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+        label, p {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button[type="reset"] {
+            background-color: #dc3545;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+    <script>
+        function validateForm(event) {
+            const checkboxes = document.querySelectorAll('input[name="likedMost"]:checked');
+            if (checkboxes.length === 0) {
+                alert("Please select at least one option for what you liked most about the campus.");
+                event.preventDefault();
+                return false;
+            }
+
+            const raffleInput = document.querySelector('input[name="raffle"]').value;
+            const raffleNumbers = raffleInput.split(',').map(num => num.trim());
+            if (raffleNumbers.length < 10 || !raffleNumbers.every(num => num.match(/^([1-9][0-9]?|100)$/))) {
+                alert("Please enter at least 10 valid comma-separated numbers between 1 and 100 in the raffle field.");
+                event.preventDefault();
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h2 style="text-align: center; color: rgb(0, 0, 0);">Student Survey Form</h2>
+    <form action="/api/surveys" method="post" onsubmit="return validateForm(event)">
+        <label>First Name: <input type="text" name="firstName" required></label>
+        <label>Last Name: <input type="text" name="lastName" required></label>
+        <label>Street Address: <input type="text" name="streetAddress" required></label>
+        <label>City: <input type="text" name="city" required></label>
+        <label>State: <input type="text" name="state" required></label>
+        <label>Zip: <input type="text" name="zip" required></label>
+        <label>Telephone Number: <input type="tel" name="telephone" required></label>
+        <label>Email ID: <input type="email" name="email" required></label>
+        <label>Date of Survey: <input type="date" name="surveyDate" required></label>
+
+        <p>What did you like most about the campus?</p>
+        <label><input type="checkbox" name="likedMost" value="Students"> Students</label>
+        <label><input type="checkbox" name="likedMost" value="Location"> Location</label>
+        <label><input type="checkbox" name="likedMost" value="Campus"> Campus</label>
+        <label><input type="checkbox" name="likedMost" value="Atmosphere"> Atmosphere</label>
+        <label><input type="checkbox" name="likedMost" value="Dorm Rooms"> Dorm Rooms</label>
+        <label><input type="checkbox" name="likedMost" value="Sports"> Sports</label>
+
+        <p>How did you become interested in the university?</p>
+        <label><input type="radio" name="interestSource" value="Friends" required> Friends</label>
+        <label><input type="radio" name="interestSource" value="Television"> Television</label>
+        <label><input type="radio" name="interestSource" value="Internet"> Internet</label>
+        <label><input type="radio" name="interestSource" value="Other"> Other</label>
+
+        <p>Likelihood of recommending this school:</p>
+        <select name="recommendation" required>
+            <option value="Very Likely">Very Likely</option>
+            <option value="Likely">Likely</option>
+            <option value="Unlikely">Unlikely</option>
+        </select>
+
+        <p>Raffle (Enter at least 10 comma-separated numbers from 1-100):</p>
+        <input type="text" name="raffle" required>
+
+        <p>Additional Comments:</p>
+        <textarea name="comments" rows="4" cols="50"></textarea>
+
+        <button type="submit">Submit</button>
+        <button type="reset">Cancel</button>
+    </form>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Survey - Bootstrap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: url('george.jpg') no-repeat center center fixed;
+      background-size: cover;
+      padding: 30px;
+    }
+    .container {
+      max-width: 800px;
+    }
+    .form-section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .btn-space {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2 class="text-center mb-4">Student Survey Form</h2>
+  <div class="form-section">
+    <form id="surveyForm" onsubmit="submitSurvey(event)">
+      <input type="hidden" id="surveyId">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-control" id="firstName" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-control" id="lastName" required>
+        </div>
+        <div class="col-md-12">
+          <label class="form-label">Street Address</label>
+          <input type="text" class="form-control" id="streetAddress">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">City</label>
+          <input type="text" class="form-control" id="city">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">State</label>
+          <input type="text" class="form-control" id="state">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label">Zip</label>
+          <input type="text" class="form-control" id="zip">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Telephone</label>
+          <input type="text" class="form-control" id="telephone">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Email ID</label>
+          <input type="email" class="form-control" id="email" required>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Survey Date</label>
+          <input type="date" class="form-control" id="surveyDate">
+        </div>
+        <div class="col-md-12">
+          <label class="form-label">What did you like most about the campus?</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="students" id="likeStudents">
+            <label class="form-check-label" for="likeStudents">Students</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="location" id="likeLocation">
+            <label class="form-check-label" for="likeLocation">Location</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="campus" id="likeCampus">
+            <label class="form-check-label" for="likeCampus">Campus</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="atmosphere" id="likeAtmosphere">
+            <label class="form-check-label" for="likeAtmosphere">Atmosphere</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="dorm_rooms" id="likeDorm">
+            <label class="form-check-label" for="likeDorm">Dorm Rooms</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="sports" id="likeSports">
+            <label class="form-check-label" for="likeSports">Sports</label>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <label class="form-label">How did you become interested in the university?</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="interestSource" value="friends" id="interestFriends">
+            <label class="form-check-label" for="interestFriends">Friends</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="interestSource" value="television" id="interestTV">
+            <label class="form-check-label" for="interestTV">Television</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="interestSource" value="internet" id="interestInternet">
+            <label class="form-check-label" for="interestInternet">Internet</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="interestSource" value="other" id="interestOther">
+            <label class="form-check-label" for="interestOther">Other</label>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <label class="form-label">Recommendation</label>
+          <select id="recommendation" class="form-select">
+            <option value="very_likely">Very Likely</option>
+            <option value="likely">Likely</option>
+            <option value="unlikely">Unlikely</option>
+          </select>
+        </div>
+        <div class="col-md-12">
+          <label class="form-label">Raffle (comma-separated)</label>
+          <input type="text" class="form-control" id="raffle">
+        </div>
+        <div class="col-md-12">
+          <label class="form-label">Comments</label>
+          <textarea id="comments" class="form-control" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="mt-3 text-end">
+        <button type="submit" class="btn btn-success btn-space">Submit</button>
+        <button type="reset" onclick="document.getElementById('surveyId').value = ''" class="btn btn-secondary">Clear</button>
+      </div>
+    </form>
+  </div>
+
+  <h4 class="mt-5">All Surveys</h4>
+  <table class="table table-striped table-bordered mt-3">
+    <thead class="table-light">
+      <tr><th>ID</th><th>Name</th><th>Email</th><th>Feedback</th><th>Actions</th></tr>
+    </thead>
+    <tbody id="surveyTableBody"></tbody>
+  </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const apiUrl = '/api/surveys';
+
+  function getLikedMost() {
+    const boxes = ['likeStudents', 'likeLocation', 'likeCampus', 'likeAtmosphere', 'likeDorm', 'likeSports'];
+    return boxes.filter(id => document.getElementById(id).checked).map(id => document.getElementById(id).value).join(', ');
+  }
+
+  function getInterestSource() {
+    const radios = document.getElementsByName('interestSource');
+    for (const r of radios) if (r.checked) return r.value;
+    return '';
+  }
+
+  function submitSurvey(event) {
+    event.preventDefault();
+    const id = document.getElementById('surveyId').value;
+    const method = id ? 'PUT' : 'POST';
+    const url = id ? `${apiUrl}/${id}` : apiUrl;
+
+    const survey = {
+      firstName: document.getElementById('firstName').value,
+      lastName: document.getElementById('lastName').value,
+      streetAddress: document.getElementById('streetAddress').value,
+      city: document.getElementById('city').value,
+      state: document.getElementById('state').value,
+      zip: document.getElementById('zip').value,
+      telephone: document.getElementById('telephone').value,
+      email: document.getElementById('email').value,
+      surveyDate: document.getElementById('surveyDate').value,
+      likedMost: getLikedMost(),
+      interestSource: getInterestSource(),
+      recommendation: document.getElementById('recommendation').value,
+      raffle: document.getElementById('raffle').value,
+      comments: document.getElementById('comments').value
+    };
+
+    fetch(url, {
+      method: method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(survey)
+    }).then(() => {
+      document.getElementById('surveyForm').reset();
+      document.getElementById('surveyId').value = '';
+      loadSurveys();
+    });
+  }
+
+  function loadSurveys() {
+    fetch(apiUrl)
+      .then(res => res.json())
+      .then(data => {
+        const table = document.getElementById('surveyTableBody');
+        table.innerHTML = '';
+        data.forEach(survey => {
+          table.innerHTML += `
+            <tr>
+              <td>${survey.id}</td>
+              <td>${survey.firstName} ${survey.lastName}</td>
+              <td>${survey.email}</td>
+              <td>${survey.comments}</td>
+              <td>
+                <button class='btn btn-sm btn-primary' onclick="editSurvey(${survey.id})">Edit</button>
+                <button class='btn btn-sm btn-danger' onclick="deleteSurvey(${survey.id})">Delete</button>
+              </td>
+            </tr>`;
+        });
+      });
+  }
+
+  function editSurvey(id) {
+    fetch(`${apiUrl}/${id}`)
+      .then(res => res.json())
+      .then(survey => {
+        document.getElementById('surveyId').value = survey.id;
+        document.getElementById('firstName').value = survey.firstName;
+        document.getElementById('lastName').value = survey.lastName;
+        document.getElementById('streetAddress').value = survey.streetAddress;
+        document.getElementById('city').value = survey.city;
+        document.getElementById('state').value = survey.state;
+        document.getElementById('zip').value = survey.zip;
+        document.getElementById('telephone').value = survey.telephone;
+        document.getElementById('email').value = survey.email;
+        document.getElementById('surveyDate').value = survey.surveyDate;
+        document.getElementById('recommendation').value = survey.recommendation;
+        document.getElementById('raffle').value = survey.raffle;
+        document.getElementById('comments').value = survey.comments;
+
+        // Restore checkboxes
+        const likedArray = (survey.likedMost || '').split(',').map(s => s.trim());
+        ['likeStudents','likeLocation','likeCampus','likeAtmosphere','likeDorm','likeSports']
+          .forEach(id => document.getElementById(id).checked = likedArray.includes(document.getElementById(id).value));
+
+        // Restore radio button
+        if (survey.interestSource) {
+          const radio = document.querySelector(`input[name='interestSource'][value='${survey.interestSource}']`);
+          if (radio) radio.checked = true;
+        }
+      });
+  }
+
+  function deleteSurvey(id) {
+    if (!confirm('Are you sure you want to delete this survey?')) return;
+    fetch(`${apiUrl}/${id}`, { method: 'DELETE' })
+      .then(() => loadSurveys());
+  }
+
+  window.onload = loadSurveys;
+</script>
+</body>
+</html>
+
+
