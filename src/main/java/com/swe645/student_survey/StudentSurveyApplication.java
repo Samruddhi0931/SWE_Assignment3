@@ -1,3 +1,4 @@
+// Spring Boot application
 package com.swe645.student_survey;
 
 import org.springframework.boot.SpringApplication;

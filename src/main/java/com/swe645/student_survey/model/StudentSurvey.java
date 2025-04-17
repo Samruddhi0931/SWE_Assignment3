@@ -1,3 +1,4 @@
+// This is the first layer of the application i.e the entity layer , it has fields like firstname , lastname etc.
 package com.swe645.student_survey.model;
 
 import jakarta.persistence.*;

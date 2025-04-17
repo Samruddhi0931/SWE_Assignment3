@@ -1,39 +1,4 @@
-//package com.swe645.student_survey.controller;
-//
-//import com.swe645.student_survey.model.StudentSurvey;
-//import com.swe645.student_survey.repository.SurveyRepository;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.MediaType;
-//import org.springframework.web.bind.annotation.*;
-//
-//import java.util.List;
-//
-//@RestController
-//@RequestMapping("/api/surveys")
-//public class SurveyController {
-//
-//    @Autowired
-//    private SurveyRepository surveyRepository;
-//
-//    // 1️⃣ GET all surveys (JSON)
-//    @GetMapping
-//    public List<StudentSurvey> getAllSurveys() {
-//        return surveyRepository.findAll();
-//    }
-//
-//    // 2️⃣ POST survey from JSON (Postman or frontend)
-//    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public StudentSurvey createSurveyJson(@RequestBody StudentSurvey survey) {
-//        return surveyRepository.save(survey);
-//    }
-//
-//    // 3️⃣ POST survey from HTML form (form-urlencoded)
-//    @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-//    public StudentSurvey createSurveyForm(StudentSurvey survey) {
-//        return surveyRepository.save(survey);
-//    }
-//}
+//In SurveyController.java we define the mapping i.e(/api/surveys) also the mapping for PUT,GET,POST
 // newcode
 package com.swe645.student_survey.controller;
 
